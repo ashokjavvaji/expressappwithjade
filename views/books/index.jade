@@ -1,0 +1,56 @@
+extends ../layout
+
+block content
+    h3 List of books available
+    if(books)
+        table.table.table-striped.table-bordered
+            th Title
+            th Author
+            th Price
+            th Format
+            th Actions
+            each book in books
+                tr
+                td #{book.title}
+                td #{book.author}
+                td #{book.price}
+                td #{book.format}
+                td 
+                    a(href='/books/view/#{book.id}' data-target='#bookModal' data-toggle="modal").btn View &nbsp; 
+                    a(href='/books/edit/#{book.id}').btn Edit &nbsp; 
+                    a(href='/books/delete/#{book.id}').btn Delete
+
+    p
+    #menu
+        a(href='/books/create') Add Book
+
+    div(id="bookModal" class="modal fade" role="dialog" tabindex="-1")
+        div.model-dialog(role="document")
+            div(class="modal-content")
+                div.modal-header
+                    h3.modal-title Title
+                div.modal-body
+                    h4 Body
+                if(book)
+                    div(class="modal-header")
+                        h3.modal-title #{book.title} Details
+                    div(class="modal-body")
+                        dl.row
+                            dt(class="col-sm-4 text-right") Title:
+                            dd(class="col-sm-8") #{book.title}
+                            dt(class="col-sm-4 text-right") Author:
+                            dd(class="col-sm-8") #{book.author}
+                            dt(class="col-sm-4 text-right") Publisher:
+                            dd(class="col-sm-8") #{book.publisher}
+                            dt(class="col-sm-4 text-right") Publication Date:
+                            dd(class="col-sm-8") #{book.publicationDate}
+                            dt(class="col-sm-4 text-right") Cost:
+                            dd(class="col-sm-8") $ #{book.price}
+                            dt(class="col-sm-4 text-right") Genre:
+                            dd(class="col-sm-8") #{book.genre}
+                            dt(class="col-sm-4 text-right") Format: 
+                            dd(class="col-sm-8") #{book.format}
+                            dt(class="col-sm-4 text-right") ISBN:
+                            dd(class="col-sm-8") #{book.isbn}
+                    div(class="modal-footer")
+                        button(type="button"  data-dismiss="modal" class="btn btn-default") Close

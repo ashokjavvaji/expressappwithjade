@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+    div
+        a(href='/books/') Back to books
+    div.container
+        h3 Enter Book Details
+        form(id='form', method='post', action='/books/edit/#{book.id}')
+            label(for='tilte') Title
+            input.form-control(type='text', id='title', name='title', value='#{book.title}')
+            <br/>
+            label(for='author') Author
+            input.form-control(type='text', id='author', name='author', value='#{book.author}')
+            <br/>
+            label(for='isbn') ISBN
+            input.form-control(type='text', id='isbn', name='isbn', value='#{book.isbn}')
+            <br/>
+            label(for='publicationDate') Publication Date
+            input.form-control(type='text', id='publicationDate', name='publicationDate', value='#{book.publicationDate}')
+            <br/>
+            label(for='publisher') Publisher
+            input.form-control(type='text', id='publisher', name='publisher', value='#{book.publisher}')
+            <br/>
+            label(for='price') Price
+            input.form-control(type='text', id='price', name='price', value='#{book.price}')
+            <br/>
+            label(for='genre') Genre
+            select.form-control(id='genre', name='genre', value='genre')
+                for genre in genres
+                    option(value="#{genre}", selected='#{book.genre}' === genre?true:false) #{genre}
+            <br/>
+            label(for='format') Format
+            select.form-control(id='format', name='format')
+                each format in formats
+                    option(value="#{format}", selected='#{book.format}' === format?true:false) #{format}
+            <br/>
+            <br/>
+            input(type='submit', value='Edit Book')
